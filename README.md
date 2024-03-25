@@ -1,7 +1,5 @@
 # FlaskInit
 
-This is an already built-in MVC structure for Flask application, you can add models views and controllers, you can also easily start working on the API with a structure already made
-
 ```
 - app
     - api
