@@ -14,7 +14,7 @@ from flask import (
 
 from flask_sqlalchemy import SQLAlchemy
 from flask_restful import Api
-
+from flask_migrate import Migrate
 # Application initialization
 app = Flask(__name__, 
             template_folder='views',
@@ -24,7 +24,7 @@ app.config.from_object(config.DevelopmentConfig)
 
 api_router = Api(app, prefix='/api/v1')  # API Initialization
 db = SQLAlchemy(app)                     # Database Initialization
-
+migrate = Migrate(app, db)
 
 """
 404 Page not found error default handler
