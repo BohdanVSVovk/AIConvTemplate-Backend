@@ -15,7 +15,7 @@ class Projects(db.Model):
     status = db.Column(db.String(80), nullable=True)
     notes = db.Column(db.String(120), nullable=True)
     open = db.Column(db.Boolean, unique=False, default=True)
-    files = db.relationship('Files', backref='projects')
+    files_pj = db.relationship('Files', backref='project')
     
     __table_args__ = {'extend_existing': True}
     
