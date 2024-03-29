@@ -7,21 +7,19 @@ from app import db
 """
 Example Project model
 """
-class Projects(db.Model):
-    __tablename__ = 'projects'
+class Files(db.Model):
+    __tablename__ = 'files'
 
     id = db.Column(db.Integer, primary_key=True)
     name = db.Column(db.String(120), unique=True, nullable=False)
-    status = db.Column(db.String(80), nullable=True)
+    source = db.Column(db.String(80), nullable=True)
     notes = db.Column(db.String(120), nullable=True)
-    open = db.Column(db.Boolean, unique=False, default=True)
-    files = db.relationship('Files', backref='projects')
-    
-    __table_args__ = {'extend_existing': True}
-    
-    def __init__(self, name, status):
+    type = db.Column(db.String(20), nullable=True)
+    file_type = db.Column(db.String(20), nullable=True)
+    projects_id = db.Column(db.Integer, db.ForeignKey('projects.id'))
+    def __init__(self, name, source):
         self.name = name
-        self.status = status
+        self.source = source
         
 
     def save(self):
@@ -44,4 +42,4 @@ class Projects(db.Model):
         return True
 
     def __repr__(self):
-        return '<Project %r>' % self.name
+        return '<File %r>' % self.name
