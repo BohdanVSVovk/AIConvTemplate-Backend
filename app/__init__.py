@@ -43,7 +43,7 @@ and register blueprints and resources
 """
 from app.models.files import Files
 from app.models.projects import Projects
-from app.controllers import main    # Controllers
+from app.controllers import main, file_api    # Controllers
 from app.api.resources import test, project   # API Resources
 
 api_router.add_resource(test.Example, '/')
@@ -51,3 +51,4 @@ api_router.add_resource(project.Project, '/project/')
 
 # Register Blueprints
 app.register_blueprint(main.bp)
+app.register_blueprint(file_api.bp)
