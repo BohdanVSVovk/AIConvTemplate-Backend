@@ -20,10 +20,11 @@ def upload():
         return "No file part in the request", 400
     
     file = request.files['file']
-    file.save(os.path.join(app.config['UPLOAD_FOLDER'], file.filename))
+    file_save_path = os.path.join(app.config['UPLOAD_FOLDER'], file.filename)
+    file.save(file_save_path)
     project_id = request.form.get('projectId')
     ext = os.path.splitext(file.filename)[1]
-    new_file = Files(name = file.filename, source = "random", notes = 'test_file', type = 'in', file_type = ext, projects_id = project_id)
+    new_file = Files(name = file.filename, source = file_save_path, notes = 'test_file', type = 'in', file_type = ext, projects_id = project_id)
     existing_file = Files.query.filter_by(name=file.filename).first()
 
     if existing_file:
