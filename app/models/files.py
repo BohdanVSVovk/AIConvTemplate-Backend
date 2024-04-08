@@ -17,9 +17,13 @@ class Files(db.Model):
     type = db.Column(db.String(20), nullable=True)
     file_type = db.Column(db.String(20), nullable=True)
     projects_id = db.Column(db.Integer, db.ForeignKey('projects.id'))
-    def __init__(self, name, source):
+    def __init__(self, name, source, notes, type, file_type, projects_id):
         self.name = name
         self.source = source
+        self.notes = notes
+        self.type = type
+        self.file_type = file_type
+        self.projects_id = projects_id
         
 
     def save(self):

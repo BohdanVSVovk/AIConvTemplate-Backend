@@ -37,6 +37,7 @@ class Project(Resource):
                     files_data = []
                     for file in project.files_pj:
                         file_data = {
+                            'id': file.id,
                             'name': file.name,
                             'source': file.source,
                             'notes': file.notes,
