@@ -16,6 +16,7 @@ class Config(object):
     SQLALCHEMY_DATABASE_URI = f'mysql://{DB_USER}:{DB_PASS}@{DB_HOST}:{DB_PORT}/{DB_NAME}'
     SQLALCHEMY_TRACK_MODIFICATIONS = False
     UPLOAD_FOLDER = 'app/public/assets/'
+    UPLOAD_PUBLIC_FOLDER = 'http://127.0.0.1:5000/public/assets/'
 class ProductionConfig(Config):
     DEBUG = False
 
