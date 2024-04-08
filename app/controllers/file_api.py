@@ -2,6 +2,7 @@ from flask import (
     Blueprint, render_template, request
 )
 import os
+import pandas as pd
 from app import app
 from app.models.files import Files
 bp = Blueprint('file_api', __name__)
@@ -9,9 +10,26 @@ bp = Blueprint('file_api', __name__)
 @bp.route('/file-processing', methods=['GET', 'POST'])
 def index():
     data = request.get_json()
-
+    selected_files_ids = data['selected_files']
+    form_data = []
+    for seleted_file_id in selected_files_ids:
+        selected_file = Files.query.get(seleted_file_id)
+        filepath = selected_file.source
+        data = pd.read_excel(filepath)
+        # Get columns
+        columns = data.columns.tolist()
+        first_row_data = data.iloc[0].astype(str).tolist()
+        # pair each column with its corresponding data
+        column_data = dict(zip(columns,first_row_data)) 
+        form_data.append(
+            {
+                'name': selected_file.name,
+                'columns': columns,
+                'row_data': column_data
+            }
+        )
     return {
-        "data": data
+        "data": form_data
     }
     
 @bp.route('/file-upload', methods=['GET','POST'])
